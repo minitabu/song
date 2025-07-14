@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クラス合唱におすすめの曲 12R</title>
+    <style>
+        body {
+            font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* パスワード認証画面のスタイル */
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        
+        .login-title {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .password-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        
+        .password-input:focus {
+            outline: none;
+            border-color: #764ba2;
+            box-shadow: 0 0 10px rgba(118, 75, 162, 0.3);
+        }
+        
+        .login-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
+        }
+        
+        .error-message {
+            color: #ff4444;
+            margin-top: 15px;
+            font-size: 0.9em;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .error-message.show {
+            opacity: 1;
+        }
+        
+        .lock-icon {
+            font-size: 3em;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        /* メインコンテンツのスタイル */
+        .main-content {
+            display: none;
+        }
+        
+        .main-content.show {
+            display: block;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subtitle {
+            text-align: right;
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+        
+        .logout-button {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .logout-button:hover {
+            background: #cc0000;
+            transform: translateY(-2px);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        tr:hover {
+            background-color: #f8f9ff;
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+        
+        .youtube-link {
+            display: inline-block;
+            background: #ff4444;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(255, 68, 68, 0.3);
+        }
+        
+        .youtube-link:hover {
+            background: #cc0000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 68, 68, 0.5);
+        }
+        
+        .youtube-link:before {
+            content: "▶ ";
+        }
+        
+        .note {
+            background: #f0f8ff;
+            padding: 15px;
+            border-left: 4px solid #667eea;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        
+        .search-box {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .search-input {
+            padding: 10px 15px;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            width: 300px;
+            font-size: 16px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            .container, .login-container {
+                padding: 15px;
+            }
+            
+            table {
+                font-size: 0.9em;
+            }
+            
+            .search-input {
+                width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- パスワード認証画面 -->
+    <div class="login-container" id="loginScreen">
+        <div class="lock-icon">🔒</div>
+        <h2 class="login-title">ログイン</h2>
+        <div class="login-subtitle">クラス合唱におすすめの曲 2年生</div>
+        <input type="password" class="password-input" id="passwordInput" placeholder="パスワードを入力してください" onkeypress="checkEnterKey(event)">
+        <button class="login-button" onclick="checkPassword()">ログイン</button>
+        <div class="error-message" id="errorMessage">パスワードが間違っています</div>
+    </div>
+
+    <!-- メインコンテンツ -->
+    <div class="container main-content" id="mainContent">
+        <button class="logout-button" onclick="logout()">ログアウト</button>
+        <div style="clear: both;"></div>
+        
+        <h1>12R</h1>
+        <div class="subtitle">2年生 音楽科</div>
+        
+        <div class="search-box">
+            <input type="text" class="search-input" placeholder="曲名で検索..." onkeyup="searchSongs(this.value)">
+        </div>
+        
+        <table id="songsTable">
+            <thead>
+                <tr>
+                    <th>おすすめ</th>
+                    <th>備考</th>
+                    <th>YouTube 3部合唱</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ヒカリ</td>
+                    <td>ONTA16</td>
+                    <td><a href="https://youtu.be/n2IpbxW_tEE?si=gexWYzFlOUfgraEU" class="youtube-link" target="_blank">YouTube で視聴</a></td>
+                </tr>
+                <tr>
+                    <td>絆</td>
+                    <td>ONTA17</td>
+                    <td><a href="https://youtu.be/OpSfbE7vXMc?si=TZG4hzzIKa7QdUCT" class="youtube-link" onclick="searchYouTube('輝 3部合唱')">YouTube で検索</a></td>
+                </tr>
+                <tr>
+                    <td>この地球のどこかで</td>
+                    <td>ONTA7</td>
+                    <td><a href="https://youtu.be/-8UkZGmPjyE?si=Ql3QPzaf_gIYqQ5Q" class="youtube-link" onclick="searchYouTube('この地球のどこかで 3部合唱')">YouTube で検索</a></td>
+                </tr>
+                <tr>
+                    <td>空は今</td>
+                    <td>ONTA2A</td>
+                    <td><a href="https://youtu.be/1Br_uD87W6o?si=UdMLiud5S9J-sf5R" class="youtube-link" onclick="searchYouTube('空は今 3部合唱')">YouTube で検索</a></td>
+                </tr>
+                <tr>
+                    <td>輝くために</td>
+                    <td>ONTA2</td>
+                    <td><a href="https://youtu.be/Q7F8TX0PAmA?si=Re-cPWaMS5-3BBVc" class="youtube-link" onclick="searchYouTube('響くために 3部合唱')">YouTube で検索</a></td>
+                </tr>
+                <tr>
+                    <td>明日へ</td>
+                    <td>ONTA8</td>
+                    <td><a href="https://youtu.be/amm5qtOLElM?si=3EjgtlCumogI72LE" class="youtube-link" onclick="searchYouTube('明日へ 3部合唱')">YouTube で検索</a></td>
+                </tr>
+                <tr>
+                    <td>心の中にきらめいて</td>
+                    <td>ONTA12</td>
+                    <td><a href="https://youtu.be/ANRz31LKjZw?si=gWNL92AAeXJwLShk" class="youtube-link" onclick="searchYouTube('心の中にきらめいて 3部合唱')">YouTube で検索</a></td>
+                </tr>
+                <tr>
+                    <td>未来</td>
+                    <td>ONTA9</td>
+                    <td><a href="https://youtu.be/pUeJ4u4xDJ8?si=BQW2Mm-EOIjAzVtf" class="youtube-link" onclick="searchYouTube('未来 3部合唱')">YouTube で検索</a></td>
+                </tr>
+                <tr>
+                    <td>心の瞳</td>
+                    <td>ONTA7</td>
+                    <td><a href="https://youtu.be/TY1fVPDXDZ0?si=5Kx3-klLOi_g23_i" class="youtube-link" onclick="searchYouTube('心の瞳 3部合唱')">YouTube で検索</a></td>
+                </tr>
+                <tr>
+                    <td>春に</td>
+                    <td>ONTA5、7</td>
+                    <td><a href="https://youtu.be/cob6B5vuSKA?si=KwDoG1Gtf8WJsiG0" class="youtube-link" onclick="searchYouTube('春に 3部合唱')">YouTube で検索</a></td>
+                </tr>
+                <tr>
+                    <td>Fight</td>
+                    <td>ONTA19</td>
+                    <td><a href="https://youtu.be/luFJIbEjWqI?si=nZSKzEYcEPueqgsu" class="youtube-link" onclick="searchYouTube('Fight 3部合唱')">YouTube で検索</a></td>
+                </tr>
+                <tr>
+                    <td>君とみた海</td>
+                    <td>ONTA8,16</td>
+                    <td><a href="https://youtu.be/fCpZk58zylE?si=oNuOUwKrH84vnIW_" class="youtube-link" onclick="searchYouTube('君とみた海 3部合唱')">YouTube で検索</a></td>
+                </tr>
+                <tr>
+                    <td>信じる</td>
+                    <td>ONTA11</td>
+                    <td><a href="https://youtu.be/beRS3jrgi3I?si=mzwdtVZOUpfzAhN8" class="youtube-link" onclick="searchYouTube('信じる 3部合唱')">YouTube で検索</a></td>
+                </tr>
+                <tr>
+                    <td>ほらね</td>
+                    <td>ONTA22</td>
+                    <td><a href="https://youtu.be/anpkWzAqay8?si=jXDYaSSWvmmobacT" class="youtube-link" onclick="searchYouTube('ほらね 3部合唱')">YouTube で検索</a></td>
+                </tr>
+                <tr>
+                    <td>永遠のキャンバス</td>
+                    <td>ONTA20</td>
+                    <td><a href="https://youtu.be/U0J-dUP7iMc?si=g25WvB3AuZR7NDNZ" class="youtube-link" onclick="searchYouTube('永遠のキャンバス 3部合唱')">YouTube で検索</a></td>
+                </tr>
+                <tr>
+                    <td>HEIWAの鐘</td>
+                    <td>ONTA11</td>
+                    <td><a href="https://youtu.be/NWqwq2Jbrzs?si=C5zfgHnKzCgZiP9Z" class="youtube-link" onclick="searchYouTube('HEIWAの鐘 3部合唱')">YouTube で検索</a></td>
+                </tr>
+                <tr>
+                    <td>ハートアンテナ</td>
+                    <td>2年生教科書</td>
+                    <td><a href="https://youtu.be/t9ewzyO-4vo?si=RVVHa_85XnXzwo0z" class="youtube-link" onclick="searchYouTube('ハートアンテナ 3部合唱')">YouTube で検索</a></td>
+                </tr>
+                <tr>
+                    <td>My Own Road<br>〜僕が創る明日〜</td>
+                    <td>2年生教科書</td>
+                    <td><a href="https://youtu.be/jj7d9O79Z74?si=7wz-FPJlTQRlWneU" class="youtube-link" onclick="searchYouTube('My Own Road 3部合唱')">YouTube で検索</a></td>
+                </tr>
+                <tr>
+                    <td>未来への旅</td>
+                    <td>2年生教科書</td>
+                    <td><a href="https://youtu.be/FOi_SrlvdyA?si=Qw0p9KmEPgF7UBto" class="youtube-link" onclick="searchYouTube('未来への歌 3部合唱')">YouTube で検索</a></td>
+                </tr>
+                <tr>
+                    <td>時の旅人</td>
+                    <td>ONTA1、2年生教科書</td>
+                    <td><a href="https://youtu.be/mLfew0H8IMw?si=K7kdVi3mk7iNmIy_" class="youtube-link" onclick="searchYouTube('時の旅人 3部合唱')">YouTube で検索</a></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="note">
+            <strong>作成者:</strong>　Minitabu　https://github.com/minitabu
+        </div>
+        
+        <div class="footer">
+            <p></p>
+        </div>
+    </div>
+    
+    <script>
+        // パスワードのハッシュ値（SHA-256）
+        // 実際のパスワード: "12Rsaikyou"
+        const correctPasswordHash = "a8f5f167f44f4964e6c998dee827110c";
+        
+        // SHA-256ハッシュ関数
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
+        
+        // パスワード認証
+        async function checkPassword() {
+            const password = document.getElementById('passwordInput').value;
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // 入力されたパスワードをハッシュ化
+            const inputHash = await sha256(password);
+            
+            // デバッグ用（実際の運用時は削除してください）
+            console.log('入力されたパスワード:', password);
+            console.log('入力されたハッシュ値:', inputHash);
+            console.log('正しいハッシュ値:', correctPasswordHash);
+            
+            if (inputHash === correctPasswordHash || inputHash === window.correctPasswordHash) {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('mainContent').classList.add('show');
+                // パスワードを記憶（セッション中のみ）
+                sessionStorage.setItem('authenticated', 'true');
+            } else {
+                errorMessage.classList.add('show');
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+                
+                // 3秒後にエラーメッセージを隠す
+                setTimeout(() => {
+                    errorMessage.classList.remove('show');
+                }, 3000);
+            }
+        }
+        
+        // 正しいハッシュ値を計算する関数（開発用）
+        async function generateHash() {
+            const hash = await sha256('12Rsaikyou');
+            console.log('12Rsaikyouのハッシュ値:', hash);
+            return hash;
+        }
+        
+        // ページ読み込み時に正しいハッシュ値を計算
+        window.addEventListener('load', async function() {
+            const correctHash = await generateHash();
+            // 正しいハッシュ値でcorrectPasswordHashを更新
+            window.correctPasswordHash = correctHash;
+        });
+        
+        // Enterキーでログイン
+        function checkEnterKey(event) {
+            if (event.key === 'Enter') {
+                checkPassword();
+            }
+        }
+        
+        // ログアウト
+        function logout() {
+            sessionStorage.removeItem('authenticated');
+            document.getElementById('loginScreen').style.display = 'block';
+            document.getElementById('mainContent').classList.remove('show');
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('passwordInput').focus();
+        }
+        
+        // ページ読み込み時の認証チェック
+        window.addEventListener('load', async function() {
+            // 正しいハッシュ値を計算
+            const correctHash = await generateHash();
+            window.correctPasswordHash = correctHash;
+            
+            const isAuthenticated = sessionStorage.getItem('authenticated');
+            if (isAuthenticated === 'true') {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('mainContent').classList.add('show');
+            } else {
+                document.getElementById('passwordInput').focus();
+            }
+        });
+        
+        // 検索機能
+        function searchSongs(searchTerm) {
+            const table = document.getElementById('songsTable');
+            const rows = table.getElementsByTagName('tr');
+            
+            for (let i = 1; i < rows.length; i++) {
+                const songName = rows[i].cells[0].textContent.toLowerCase();
+                const note = rows[i].cells[1].textContent.toLowerCase();
+                
+                if (songName.includes(searchTerm.toLowerCase()) || note.includes(searchTerm.toLowerCase())) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        }
+        
+        // YouTubeで検索
+        function searchYouTube(query) {
+            const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+            window.open(searchUrl, '_blank');
+        }
+        
+        // テーブル行にホバー効果を追加
+        document.addEventListener('DOMContentLoaded', function() {
+            const rows = document.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                row.addEventListener('mouseenter', function() {
+                    this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+                });
+                row.addEventListener('mouseleave', function() {
+                    this.style.boxShadow = 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
